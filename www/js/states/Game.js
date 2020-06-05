@@ -15,12 +15,12 @@ Game.prototype = {
         this.timecooldownBool = false;
 
         this.duration = this.video.duration*1000;
-        this.video.onPlay.addOnce(this.goVideoTime, this);
+        // this.video.onPlay.addOnce(this.goVideoTime, this);
         
 
         this.video.addToWorld(this.game.width / 2, this.game.height/2, 0.5, 0.5,2,2);
-        this.video.play(true);
-
+        this.video.play();
+        // console.log("loop "+this.video.loop);
         this.spacekey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.qkey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
         
@@ -29,13 +29,18 @@ Game.prototype = {
     },
     goVideoTime:function(){
         //this.duration = tiempo por defecto del video
-        this.game.time.events.add(this.duration, this.goMenu, this);    
+        // this.game.time.events.add(this.duration, this.goMenu, this);    
     },
     goMenu:function(){
         this.state.start("Menu");
         
     },
     update:function(){
+        if(!this.video.playing){
+            this.video.play(false);
+            this.goMenu();
+        }
+    
         this.qkey.onDown.add(this.cooldownPlayBackRate,this);
         this.activeCooldown();
 
