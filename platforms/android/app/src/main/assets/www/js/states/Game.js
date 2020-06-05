@@ -20,7 +20,8 @@ Game.prototype = {
 
         this.video.addToWorld(this.game.width / 2, this.game.height/2, 0.5, 0.5,2,2);
         this.video.play();
-        // console.log("loop "+this.video.loop);
+        this.video.volume = 0.2;
+        
         this.spacekey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.qkey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
         
@@ -32,6 +33,7 @@ Game.prototype = {
         // this.game.time.events.add(this.duration, this.goMenu, this);    
     },
     goMenu:function(){
+        this.video.playbackRate = this.rate;
         this.state.start("Menu");
         
     },
